@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Debu Zone"
+description = "A mobile-first business website for Debu Zone, a digital marketing and content services business in Chishtian Sharif, Pakistan. It highlights the verified services and five-star review record and helps prospective clients call or find the business."
+version = "1.0.0"
+id = "artifacts/debu-zone"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 23471
+
+[services.development]
+run = "pnpm --filter @workspace/debu-zone run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/debu-zone", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/debu-zone/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "23471"
+BASE_PATH = "/"
